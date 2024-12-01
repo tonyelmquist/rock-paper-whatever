@@ -13,8 +13,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/rock.png",
+        "backgroundColor": "#000000"
       }
     },
     "web": {
@@ -27,12 +27,18 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/rock.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#000000"
         }
-      ]
+      ],
+       [
+         "expo-font",
+         {
+           "fonts": ["./assets/fonts/Inter-Black.otf"]
+         }
+       ]
     ],
     "experiments": {
       "typedRoutes": true

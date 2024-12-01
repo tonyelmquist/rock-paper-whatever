@@ -16,8 +16,11 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
+    "@react-native-async-storage/async-storage": "^1.22.0",
     "@react-navigation/bottom-tabs": "^7.0.0",
     "@react-navigation/native": "^7.0.0",
+    "@react-navigation/stack": "^7.0.0",
+    "chatgpt": "^5.2.5",
     "expo": "~52.0.11",
     "expo-blur": "~14.0.1",
     "expo-constants": "~17.0.3",
@@ -42,6 +45,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@react-native-community/cli": "^15.1.2",
     "@types/jest": "^29.5.12",
     "@types/react": "~18.3.12",
     "@types/react-test-renderer": "^18.3.0",
