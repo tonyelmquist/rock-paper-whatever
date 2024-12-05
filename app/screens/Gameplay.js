@@ -9,28 +9,26 @@ import {
   useAnimatedValue,
   Image,
   Easing,
-  ImageBackground,
   TouchableOpacity,
+  ImageBackground,
 } from "react-native";
+import NotchedButton from "../components/NotchedButton";
 import { useNavigation } from "@react-navigation/native";
 import { categories, getAllItems } from "../data/categories";
 
 // Import images
-import rockImage from "../../assets/images/rock.png";
-import paperImage from "../../assets/images/paper.png";
-import whateverImage from "../../assets/images/question.png";
-import backgroundImage from "../../assets/images/bg.png";
+import rockImage from "../../assets/images/fistograph.png";
+import paperImage from "../../assets/images/papergraf.png";
+import whateverImage from "../../assets/images/handahand.png";
+import floatingButtonImage from "../../assets/images/handograf.png";
+import backgroundImage from "../../assets/images/vicbg.jpg";
 const GameplayScreen = ({ route }) => {
-  const { category } = route.params;
+  const { category, customCategory } = route.params;
   const [player1Entry, setPlayer1Entry] = useState("");
   const [player2Entry, setPlayer2Entry] = useState("");
   const [winner, setWinner] = useState("");
   const [currentImage, setCurrentImage] = useState(null);
   const [playText, setPlayText] = useState("");
-
-  const [fontsLoaded] = useFonts({
-    Minecraft: require("../../assets/fonts/Minecraft.ttf"),
-  });
 
   useEffect(() => {
     startAnimation();
@@ -43,14 +41,46 @@ const GameplayScreen = ({ route }) => {
   };
 
   const fetchWinner = async (entry1, entry2) => {
+    const randomString = Math.random().toString(36).substring(7);
     try {
       const response = await fetch(
-        `http://www.rockpaperwhatever.com/judgement.php?param1=${entry1}&param2=${entry2}`
+        `http://www.rockpaperwhatever.com/judgement.php?param1=${entry1}&param2=${entry2}&cacheBuster=${randomString}`
       );
       const result = await response.text();
       setWinner(result);
+      navigation.navigate("Judgement", { text: result });
     } catch (error) {
       console.error("Error fetching winner:", error);
+    }
+  };
+
+  const fetchRandomItems = async () => {
+    try {
+      const randomString = Math.random().toString(36).substring(7);
+      const response = await fetch(
+        `http://www.rockpaperwhatever.com/randomness.php?cacheBuster=${randomString}`
+      );
+      const result = await response.text();
+      const items = result.split(",");
+      setPlayer1Entry(items[0]);
+      setPlayer2Entry(items[1]);
+    } catch (error) {
+      console.error("Error fetching random items:", error);
+    }
+  };
+
+  const fetchMyCategory = async () => {
+    try {
+      const randomString = Math.random().toString(36).substring(7);
+      const response = await fetch(
+        `http://www.rockpaperwhatever.com/choices.php?param1=${customCategory}&cacheBuster=${randomString}`
+      );
+      const result = await response.text();
+      const items = result.split(",");
+      setPlayer1Entry(items[0]);
+      setPlayer2Entry(items[1]);
+    } catch (error) {
+      console.error("Error fetching random items:", error);
     }
   };
 
@@ -99,7 +129,13 @@ const GameplayScreen = ({ route }) => {
 
   const displayCategoryEntries = () => {
     let items;
-    if (category === "Random") {
+    if (category === "Really Random") {
+      fetchRandomItems();
+      return;
+    } else if (category === "Create Your Own") {
+      fetchMyCategory();
+      return;
+    } else if (category === "Random") {
       items = getAllItems();
     } else {
       items = categories.find((cat) => cat.name === category).items;
@@ -113,51 +149,68 @@ const GameplayScreen = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={{ flex: 1 }}>
       {!(player1Entry && player2Entry) && winner === "" ? (
-        <>
+        <View style={{ flex: 1 }}>
+          <View style={styles.bgImageWrapper}>
+            <Image source={backgroundImage} style={styles.bgImage} />
+          </View>
+
           <Animated.View
             // eslint-disable-next-line react-native/no-inline-styles
             style={{
               height: "100%",
               width: "100%",
               transform: [{ scale: scaleAnim }],
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            <Image source={currentImage} style={styles.fullscreenImage} />
+            <Image
+              source={currentImage}
+              style={styles.fullscreenImage}
+              resizeMode="contain"
+            />
+            <Text style={styles.playText}>{playText}</Text>
           </Animated.View>
-          <Text style={styles.playText}>{playText}</Text>
-        </>
+        </View>
       ) : (
-        <ImageBackground source={backgroundImage} style={styles.background}>
+        <View style={{ flex: 1 }}>
+          <View style={styles.bgImageWrapper}>
+            <Image source={backgroundImage} style={styles.bgImage} />
+          </View>
           <View style={styles.entriesContainer}>
             <View style={styles.entryRow}>
               <Text style={styles.entryText}>{player1Entry}</Text>
-              <Text style={styles.winnerText}>vs</Text>
+              <Text style={styles.winnerText}>versus</Text>
               <Text style={styles.entryText}>{player2Entry}</Text>
-              <Text style={styles.winnerText}>{winner}</Text>
             </View>
-            <TouchableOpacity
-              onPress={() => fetchWinner(player1Entry, player2Entry)}
-              style={styles.playAgainButton}
-            >
-              <Text style={styles.buttonText}>Get a Judgement!</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={navigateToCategories}
-              style={styles.playAgainButton}
-            >
-              <Text style={styles.buttonText}>Categories</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={startAnimation}
-              style={styles.playAgainButton}
-            >
-              <Text style={styles.buttonText}>Play Again</Text>
-            </TouchableOpacity>
           </View>
-        </ImageBackground>
+          <View style={styles.controlsContainer}>
+            <NotchedButton
+              action={() => fetchWinner(player1Entry, player2Entry)}
+              text="Get a Judgement!"
+              style={{ marginBottom: 10 }}
+            />
+            <NotchedButton
+              action={startAnimation}
+              text="Play Again"
+              style={{ marginBottom: 10 }}
+            />
+            <NotchedButton action={navigateToCategories} text="Categories" />
+          </View>
+        </View>
       )}
+      <TouchableOpacity
+        style={styles.floatingButton}
+        onPress={() => navigation.navigate("Home")}
+      >
+        <ImageBackground
+          source={floatingButtonImage}
+          style={styles.floatingButtonImage}
+          imageStyle={{ borderRadius: 25 }}
+        />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -167,49 +220,63 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#000000",
+  },
+  bgImageWrapper: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  bgImage: {
+    flex: 1,
+    resizeMode: "stretch",
+    width: "100%",
   },
   fullscreenImage: {
-    width: "80%",
-    height: "80%",
-    resizeMode: "cover",
+    width: "100%",
+    height: "100%",
     alignSelf: "center",
     alignItems: "center",
-    backgroundColor: "#000000",
   },
   entriesContainer: {
-    marginTop: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    alignSelf: "center",
+  },
+  winnerTextContainer: {
+    marginLeft: "20%",
+    marginRight: "20%",
+    height: 200,
   },
   entryText: {
-    fontSize: 24, // Increased font size
+    fontSize: 40, // Increased font size
     fontWeight: "bold",
     textTransform: "uppercase", // Added font
     marginVertical: 10,
-    fontFamily: "Fixedsys62",
+    fontFamily: "Ewert",
+    color: "#000000",
+    textAlign: "center",
   },
   winnerText: {
     fontSize: 18,
     marginVertical: 10,
-    fontFamily: "Fixedsys62",
+    fontFamily: "AmericanTypewriter",
+    color: "#000000",
   },
-  background: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover",
-    backgroundColor: "#000000",
-  },
+
   entryRow: {
     opacity: 1,
     margin: 20,
     alignItems: "center",
     padding: 20,
-    backgroundColor: "rgba(255, 255, 255, 0.9)",
     fontSize: 36,
     fontWeight: "bold",
-    fontFamily: "Fixedsys62",
+    fontFamily: "Ewert",
+    color: "#000000",
   },
   playAgainButton: {
-    backgroundColor: "#000000", // Button background color
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
@@ -217,23 +284,70 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 20,
     marginRight: 20,
-    fontFamily: "Fixedsys62",
+    fontFamily: "Ewert",
+    color: "#000000",
+    shadowColor: "rgba(0,0,0, .4)", // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS
+    backgroundColor: "#fff",
+    elevation: 2, // Android
+
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
   },
   buttonText: {
     color: "#FFFFFF", // Text color
     fontSize: 18,
     fontWeight: "bold",
     textTransform: "uppercase",
-    fontFamily: "Fixedsys62",
+    fontFamily: "Ewert",
+    color: "#000000",
   },
   playText: {
     fontSize: 40,
     fontWeight: "bold",
     textTransform: "uppercase",
-    fontFamily: "Fixedsys62",
-    color: "#FFFFFF",
+    fontFamily: "Ewert",
+    color: "#000000",
     textAlign: "center",
-    marginTop: -200,
+    marginTop: -100,
+  },
+  controlsContainer: {
+    flexDirection: "column",
+    marginLeft: "20%",
+    width: "60%",
+    marginBottom: "20%",
+    justifyContent: "space-between",
+  },
+  controlButton: {
+    marginTop: 20,
+  },
+  floatingButton: {
+    position: "absolute",
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: "#fff",
+    borderWidth: 2,
+    borderColor: "#000",
+    justifyContent: "center",
+    alignItems: "center",
+    bottom: 20,
+    right: 20,
+    elevation: 5,
+  },
+  floatingButtonImage: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  floatingButtonText: {
+    color: "#fff",
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });
 

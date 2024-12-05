@@ -1,11 +1,12 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./screens/HomeScreen";
 import CategoryScreen from "./screens/CategoryScreen";
 import CategoryDetailScreen from "./screens/CategoryDetail";
 import GameplayScreen from "./screens/Gameplay"; // Make sure this import exists
-
+import JudgementScreen from "./screens/Judgement";
+import JustJudgementScreen from "./screens/JustJudgement";
+import HowToScreen from "./screens/HowTo";
 const Stack = createStackNavigator();
 
 function AppNavigator() {
@@ -30,6 +31,21 @@ function AppNavigator() {
         options={{ headerShown: false }}
         name="Gameplay"
         component={GameplayScreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Judgement"
+        component={JudgementScreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="JustJudgement"
+        component={JustJudgementScreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="HowTo"
+        component={HowToScreen}
       />
     </Stack.Navigator>
   );
