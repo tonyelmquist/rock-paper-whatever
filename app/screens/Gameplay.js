@@ -90,7 +90,7 @@ const GameplayScreen = ({ route }) => {
     setPlayer2Entry("");
     setWinner("");
     const images = [rockImage, paperImage, whateverImage];
-    const playState = ["Rock!", "Paper!", "Whatever!"];
+    const playState = ["Rock,", "Paper,", "Whatever!"];
     let index = 0;
 
     const animateImage = () => {
@@ -181,9 +181,21 @@ const GameplayScreen = ({ route }) => {
           </View>
           <View style={styles.entriesContainer}>
             <View style={styles.entryRow}>
-              <Text style={styles.entryText}>{player1Entry}</Text>
+              <Text
+                style={styles.entryText}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}
+              >
+                {player1Entry}
+              </Text>
               <Text style={styles.winnerText}>versus</Text>
-              <Text style={styles.entryText}>{player2Entry}</Text>
+              <Text
+                style={styles.entryText}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}
+              >
+                {player2Entry}
+              </Text>
             </View>
           </View>
           <View style={styles.controlsContainer}>
@@ -313,6 +325,7 @@ const styles = StyleSheet.create({
     color: "#000000",
     textAlign: "center",
     marginTop: -100,
+    alignSelf: "center",
   },
   controlsContainer: {
     flexDirection: "column",

@@ -37,7 +37,7 @@ const CategoryDetailScreen = ({ route }) => {
         {category !== "Create Your Own" ? (
           <View style={styles.container}>
             <Text style={styles.plainText}>The category is:</Text>
-            <Text style={styles.categoryText}>{category}</Text>
+            <Text style={styles.categoryText} adjustsFontSizeToFit={true} numberOfLines={1}>{category}</Text>
           </View>
         ) : (
           <View style={styles.container}>
