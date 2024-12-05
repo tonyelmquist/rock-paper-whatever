@@ -24,7 +24,7 @@ const HomeScreen = ({ navigation }) => {
           <Text style={styles.title}>Paper!</Text>
           <Text style={styles.title}>Whatever!</Text>
           <Text style={styles.subtitle}>
-            An unexpected twist on the classic game
+            The game where you decide who beats who! 
           </Text>
         </View>
         <View style={styles.buttonContainer}>
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: "center",
     fontFamily: "AmericanTypewriter",
+    width: "80%",
   },
   background: {
     flex: 1,
