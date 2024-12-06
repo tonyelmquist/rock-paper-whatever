@@ -37,7 +37,11 @@ const HomeScreen = ({ navigation }) => {
           />
           <NotchedButton
             style={styles.button}
-            action={() => navigation.navigate("Category")}
+            action={() =>
+              navigation.navigate("CategoryDetail", {
+                category: "Create Your Own",
+              })
+            }
             text="Make Your Own"
           />
           <NotchedButton

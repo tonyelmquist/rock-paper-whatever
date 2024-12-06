@@ -69,7 +69,6 @@ const GameplayScreen = ({ route }) => {
 
       const judgementEndpoint = judgementStyle + ".php";  
 
-
      try {
        const response = await fetch(
          `http://www.rockpaperwhatever.com/${judgementEndpoint}?param1=${entry1}&param2=${entry2}&cacheBuster=${randomString}`
@@ -157,7 +156,7 @@ const GameplayScreen = ({ route }) => {
 
   const displayCategoryEntries = () => {
     let items;
-    if (category === "Really Random") {
+    if (category === "Random (Robot Magic)") {
       fetchRandomItems();
       return;
     } else if (category === "Create Your Own") {
