@@ -29,33 +29,48 @@ const HowToScreen = () => {
         <Image source={backgroundImage} style={styles.bgImage} />
       </View>
       <View style={styles.scrollContainer}>
-        <ScrollView style={styles.scrollView} contentContainerStyle={styles.textContainer}>
-          <Text style={styles.title}>
-            How to Play Rock, Paper, Whatever!
-          </Text>
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.textContainer}
+        >
+          <Text style={styles.title}>Rock, Paper, Whatever!</Text>
           <Text style={styles.subtitle}>
-            Welcome to a whimsical twist on the classic game! In Rock, Paper, Whatever, your choices battle it out to see who reigns supreme. Here’s how to play:
+            Do you like to have silly pointless arguments with your friends? Then “Rock, Paper, Whatever” is the game for you!
           </Text>
-          <Text style={styles.sectionTitle}>Game Modes</Text>
-          <Text style={styles.modeTitle}>1. Category Mode</Text>
-          <Text style={styles.bulletPoint}>• Choose a category from the list (e.g., Animals, Historical Figures, or Inventions).</Text>
-          <Text style={styles.bulletPoint}>• The app generates two random options from the selected category (e.g., “Kea” vs. “Shoebill”).</Text>
-          <Text style={styles.bulletPoint}>• Tap “Get a Judgement!” to see which option wins and read a fun, creative explanation.</Text>
-          <Text style={styles.modeTitle}>2. Create Your Own Category</Text>
-          <Text style={styles.bulletPoint}>• Enter your own category (e.g., “Birds”) to personalize your game.</Text>
-          <Text style={styles.bulletPoint}>• The app’s AI selects two contenders from your category.</Text>
-          <Text style={styles.bulletPoint}>• Tap “Play” and then “Get a Judgement!” to see the result.</Text>
-          <Text style={styles.modeTitle}>3. Manual Mode</Text>
-          <Text style={styles.bulletPoint}>• Enter two custom options into the text fields (e.g., “The Pope” vs. “Anthills”).</Text>
-          <Text style={styles.bulletPoint}>• Tap “Get a Judgement!” to let the app’s AI decide the winner and explain why.</Text>
-          <Text style={styles.sectionTitle}>Gameplay Tips</Text>
-          <Text style={styles.bulletPoint}>• Random & Really Random: Can’t decide? Use these options to let the app surprise you with categories and contenders.</Text>
-          <Text style={styles.bulletPoint}>• Fun & Fair Play: The app’s decisions are meant to be entertaining. Don’t take them too seriously—just enjoy the creativity!</Text>
-          <Text style={styles.bulletPoint}>• Replay or Explore: After each judgement, you can tap “Play Again” to try new combinations or return to the Categories menu for a fresh start.</Text>
+          <Text style={styles.bulletPoint}>
+            You play it just like “Rock, Paper, Scissors” except you can play anything you want. Darth Vader versus Pineapple. Utilitarianism versus Kylie Minogue. Purple versus A Caveman. And then it's up to you do decide who wins!
+          </Text>
+          <View style={styles.separator} />
+          <Text style={styles.bulletPoint}>
+            Now if you want, you can play within a category - Rock, Paper, Animals, or Rock, Paper, 19th-Century British Politicians. And that's where the mobile game comes in - pick a category, and let it pick your scissors for you!
+          </Text>
+          <View style={styles.separator} />
+          <Text style={styles.bulletPoint}>
+            Or have it pick for you at random, either from its built-in categories or, using robot magic, from the whole Internet. Or enter your own category, and let the app pick for you!
+          </Text>
+          <View style={styles.separator} />
+          <Text style={styles.bulletPoint}>
+            Click on “Make Your Own” and you can enter your own category, and the app will play for you. Then it's up to you and your friend to argue who the best Minnesota Twins pitcher or Pakistani pop star is.
+          </Text>
+          <View style={styles.separator} />
+          <Text style={styles.bulletPoint}>
+            Can't agree on who wins? If you're playing the “old-fashioned” way you can just click on “Get a Judgement” and let the app decide for you who won - you can choose from Obtuse, Play-by-play, or Pedantic for a judgement style in Settings.
+          </Text>
+          <View style={styles.separator} />
+          <Text style={styles.bulletPoint}>
+            Or if you're letting the app play for you, you can click on “Get a Judgement” and let the robot magic in the game give you a verdict.
+          </Text>
+          <View style={styles.separator} />
+          <Text style={styles.conclusion}>
+            All of the AI-powered magic is thanks to the wonderful folks at OpenAI. You can use the AI feature for free for 7 days, and then you'll need to sign up for an (incredibly cheap) subscription to cover our AI costs. Subscribe in the Settings menu to keep playing as long as you like!
+          </Text>
         </ScrollView>
       </View>
       <SettingsButton />
-      <FloatingButton onPress={navigateToHome} imageSource={floatingButtonImage} />
+      <FloatingButton
+        onPress={navigateToHome}
+        imageSource={floatingButtonImage}
+      />
     </View>
   );
 };
@@ -115,11 +130,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
     fontFamily: "Aguante",
+    textAlign: "center",
   },
   subtitle: {
     fontSize: 18,
     marginBottom: 10,
     fontFamily: "AmericanTypewriter",
+    textAlign: "center",
   },
   sectionTitle: {
     fontSize: 20,
@@ -158,6 +175,13 @@ const styles = StyleSheet.create({
     marginBottom: "20%",
     marginLeft: "10%",
     marginRight: "10%",
+  },
+  separator: {
+    width: '60%',
+    height: 1,
+    backgroundColor: '#000',
+    alignSelf: 'center',
+    marginVertical: 10,
   },
 });
 
