@@ -15,13 +15,17 @@ import {
 import NotchedButton from "../components/NotchedButton";
 import { useNavigation } from "@react-navigation/native";
 import { categories, getAllItems } from "../data/categories";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import FloatingButton from "../components/FloatingButton";
+import SettingsButton from "../components/SettingsButton";
 // Import images
 import rockImage from "../../assets/images/fistograph.png";
 import paperImage from "../../assets/images/papergraf.png";
 import whateverImage from "../../assets/images/handahand.png";
 import floatingButtonImage from "../../assets/images/handograf.png";
 import backgroundImage from "../../assets/images/vicbg.jpg";
+
+
 const GameplayScreen = ({ route }) => {
   const { category, customCategory } = route.params;
   const [player1Entry, setPlayer1Entry] = useState("");
@@ -29,6 +33,7 @@ const GameplayScreen = ({ route }) => {
   const [winner, setWinner] = useState("");
   const [currentImage, setCurrentImage] = useState(null);
   const [playText, setPlayText] = useState("");
+   const [judgementStyle, setJudgementStyle] = useState("pedantic");
 
   useEffect(() => {
     startAnimation();
@@ -39,17 +44,40 @@ const GameplayScreen = ({ route }) => {
   const navigateToCategories = () => {
     navigation.navigate("Category");
   };
+  useEffect(() => {
+    const loadSettings = async () => {
+      try {
 
-  const fetchWinner = async (entry1, entry2) => {
-    const randomString = Math.random().toString(36).substring(7);
-    try {
-      const response = await fetch(
-        `http://www.rockpaperwhatever.com/judgement.php?param1=${entry1}&param2=${entry2}&cacheBuster=${randomString}`
-      );
-      const result = await response.text();
-      setWinner(result);
-      navigation.navigate("Judgement", { text: result });
-    } catch (error) {
+        const judgementStyleValue = await AsyncStorage.getItem(
+          "judgementStyle"
+        );
+
+        if (judgementStyleValue !== null) {
+          setJudgementStyle(judgementStyleValue);
+        }
+
+      } catch (error) {
+        console.error("Failed to load settings", error);
+      }
+    };
+
+    loadSettings();
+  }, []);
+
+    const fetchWinner = async (entry1, entry2) => {
+      const randomString = Math.random().toString(36).substring(7);
+
+      const judgementEndpoint = judgementStyle + ".php";  
+
+
+     try {
+       const response = await fetch(
+         `http://www.rockpaperwhatever.com/${judgementEndpoint}?param1=${entry1}&param2=${entry2}&cacheBuster=${randomString}`
+       );
+       const result = await response.text();
+       setWinner(result);
+       navigation.navigate("Judgement", { text: result });
+     } catch (error) {
       console.error("Error fetching winner:", error);
     }
   };
@@ -213,16 +241,11 @@ const GameplayScreen = ({ route }) => {
           </View>
         </View>
       )}
-      <TouchableOpacity
-        style={styles.floatingButton}
+      <SettingsButton />
+      <FloatingButton 
         onPress={() => navigation.navigate("Home")}
-      >
-        <ImageBackground
-          source={floatingButtonImage}
-          style={styles.floatingButtonImage}
-          imageStyle={{ borderRadius: 25 }}
-        />
-      </TouchableOpacity>
+        imageSource={floatingButtonImage}
+      />
     </View>
   );
 };

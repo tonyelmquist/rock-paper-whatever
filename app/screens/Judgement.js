@@ -3,10 +3,20 @@ import { View, Text, Image, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import NotchedButton from "../components/NotchedButton";
 import backgroundImage from "../../assets/images/vicbg.jpg";
+import FloatingButton from "../components/FloatingButton";
+import SettingsButton from "../components/SettingsButton";
+
+import floatingButtonImage from "../../assets/images/handograf.png";
+
 
 const JudgementScreen = ({ route }) => {
   const navigation = useNavigation();
   const { text } = route.params;
+
+
+  const navigateToHome = () => {
+    navigation.navigate("Home");
+  };
 
   const parts = text.split(",");
   const winner = parts[0];
@@ -25,6 +35,8 @@ const JudgementScreen = ({ route }) => {
       <View style={styles.backButton}>
         <NotchedButton action={() => navigation.goBack()} text="Back" />
       </View>
+      <SettingsButton />
+      <FloatingButton onPress={navigateToHome} imageSource={floatingButtonImage} />
     </View>
   );
 };

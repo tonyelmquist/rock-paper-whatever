@@ -1,20 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, TextInput, Image, StyleSheet, Text, TouchableOpacity, ImageBackground } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import NotchedButton from "../components/NotchedButton";
 import backgroundImage from "../../assets/images/vicbg.jpg";
 import floatingButtonImage from "../../assets/images/handograf.png";
+import FloatingButton from "../components/FloatingButton";
+import SettingsButton from "../components/SettingsButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const EnterItemsScreen = () => {
   const [item1, setItem1] = useState("");
   const [item2, setItem2] = useState("");
   const navigation = useNavigation();
+  const [judgementStyle, setJudgementStyle] = useState("obtuse");
 
+  const navigateToHome = () => {
+    navigation.navigate("Home");
+  };
+
+  useEffect(() => {
+    const loadSettings = async () => {
+      try {
+        const judgementStyleValue = await AsyncStorage.getItem(
+          "judgementStyle"
+        );
+
+        if (judgementStyleValue !== null) {
+          setJudgementStyle(judgementStyleValue);
+        }
+      } catch (error) {
+        console.error("Failed to load settings", error);
+      }
+    };
+
+    loadSettings();
+  }, []);
+
+  const judgementEndpoint = judgementStyle + ".php";
   const fetchJudgement = async () => {
     const randomString = Math.random().toString(36).substring(7);
     try {
       const response = await fetch(
-        `http://www.rockpaperwhatever.com/judgement.php?param1=${item1}&param2=${item2}&cacheBuster=${randomString}`
+        `http://www.rockpaperwhatever.com/${judgementEndpoint}?param1=${item1}&param2=${item2}&cacheBuster=${randomString}`
       );
       const result = await response.text();
       navigation.navigate("Judgement", { text: result });
@@ -28,6 +55,7 @@ const EnterItemsScreen = () => {
       <View style={styles.bgImageWrapper}>
         <Image source={backgroundImage} style={styles.bgImage} />
       </View>
+      <Text style={styles.orText}>Need someone to decide who wins? Enter your two items and let the app decide!</Text>
       <TextInput
         style={styles.input}
         placeholder="Enter first item"
@@ -42,18 +70,10 @@ const EnterItemsScreen = () => {
         onChangeText={setItem2}
       />
       <View style={styles.buttonContainer}>
-        <NotchedButton action={fetchJudgement} text="Get Judgement" />
+        <NotchedButton action={fetchJudgement} text="Get a Judgement!" />
       </View>
-      <TouchableOpacity
-        style={styles.floatingButton}
-        onPress={() => navigation.navigate("Home")}
-      >
-        <ImageBackground
-          source={floatingButtonImage}
-          style={styles.floatingButtonImage}
-          imageStyle={{ borderRadius: 25 }}
-        />
-      </TouchableOpacity>
+      <FloatingButton onPress={navigateToHome} imageSource={floatingButtonImage} />
+      <SettingsButton />
     </View>
   );
 };
@@ -92,6 +112,8 @@ const styles = StyleSheet.create({
     fontFamily: "AmericanTypewriter",
     marginBottom: 10,
     marginTop: 10,
+    width: "60%",
+    textAlign: "center",
   },
   buttonContainer: {
     marginBottom: 60,

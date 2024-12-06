@@ -3,6 +3,8 @@ import { useFonts } from "expo-font";
 import NotchedButton from "../components/NotchedButton";
 import { View, Text, StyleSheet, Image } from "react-native";
 import Loading from "../components/Loading";
+import SettingsButton from "../components/SettingsButton";
+import floatingButtonImage from "../../assets/images/handograf.png";
 
 const HomeScreen = ({ navigation }) => {
   const [loaded, error] = useFonts({
@@ -24,19 +26,24 @@ const HomeScreen = ({ navigation }) => {
           <Text style={styles.title}>Paper!</Text>
           <Text style={styles.title}>Whatever!</Text>
           <Text style={styles.subtitle}>
-            The game where you decide who beats who! 
+            The game where you decide who beats who!
           </Text>
         </View>
         <View style={styles.buttonContainer}>
           <NotchedButton
             style={styles.button}
             action={() => navigation.navigate("Category")}
-            text="Start Game"
+            text="Pick a Category"
+          />
+          <NotchedButton
+            style={styles.button}
+            action={() => navigation.navigate("Category")}
+            text="Make Your Own"
           />
           <NotchedButton
             style={styles.button}
             action={() => navigation.navigate("JustJudgement")}
-            text="Get a Judgement!"
+            text="Just a Judgement"
           />
           <NotchedButton
             style={styles.button}
@@ -44,6 +51,7 @@ const HomeScreen = ({ navigation }) => {
             text="How to Play"
           />
         </View>
+        <SettingsButton />
       </View>
     );
   return <Loading />;

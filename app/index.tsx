@@ -7,6 +7,7 @@ import GameplayScreen from "./screens/Gameplay"; // Make sure this import exists
 import JudgementScreen from "./screens/Judgement";
 import JustJudgementScreen from "./screens/JustJudgement";
 import HowToScreen from "./screens/HowTo";
+import SettingsScreen from "./screens/Settings";
 const Stack = createStackNavigator();
 
 function AppNavigator() {
@@ -46,6 +47,11 @@ function AppNavigator() {
         options={{ headerShown: false }}
         name="HowTo"
         component={HowToScreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Settings"
+        component={SettingsScreen}
       />
     </Stack.Navigator>
   );

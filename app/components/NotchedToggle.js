@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const NotchedButton = ({  text, action }) => {
-  const color = "#271D1B";
+const NotchedToggle = ({  text, action, selected }) => {
+  const bgcolor = selected ? "#271D1B" : "#818181";
+  const color = selected ? "white" : "black";
   const width = "100%";
 
   return (
@@ -11,14 +12,14 @@ const NotchedButton = ({  text, action }) => {
         style={{
           ...styles.notchStyle,
           borderBottomWidth: 10,
-          borderBottomColor: color,
+          borderBottomColor: bgcolor,
           width,
         }}
       />
       <View
-        style={{ ...styles.centerViewStyle, width, backgroundColor: color }}
+        style={{ ...styles.centerViewStyle, width, backgroundColor: bgcolor }}
       >
-        <Text style={styles.textStyle} adjustsFontSizeToFit={true} numberOfLines={1}>
+        <Text style={{ fontSize: 18, color: color, fontFamily: "Aguante" }}>
           {text}
         </Text>
       </View>
@@ -26,7 +27,7 @@ const NotchedButton = ({  text, action }) => {
         style={{
           ...styles.notchStyle,
           borderTopWidth: 10,
-          borderTopColor: color,
+          borderTopColor: bgcolor,
           width,
         }}
       />
@@ -48,7 +49,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 30,
   },
-  textStyle: { fontSize: 18, color: "white", fontFamily: "Aguante" },
 });
 
-export default NotchedButton;
+export default NotchedToggle;

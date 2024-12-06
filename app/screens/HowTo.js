@@ -8,13 +8,21 @@ import {
   StyleSheet,
   FlatList,
 } from "react-native";
-
+import FloatingButton from "../components/FloatingButton";
+import SettingsButton from "../components/SettingsButton";
 import { useNavigation } from "@react-navigation/native";
+import floatingButtonImage from "../../assets/images/handograf.png";
+import backgroundImage from "../../assets/images/vicbg.jpg";
 
 
 const HowToScreen = () => {
   const navigation = useNavigation();
-  const backgroundImage = require("../../assets/images/vicbg.jpg");
+
+
+  const navigateToHome = () => {
+    navigation.navigate("Home");
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.bgImageWrapper}>
@@ -46,6 +54,8 @@ const HowToScreen = () => {
           <Text style={styles.bulletPoint}>• Replay or Explore: After each judgement, you can tap “Play Again” to try new combinations or return to the Categories menu for a fresh start.</Text>
         </ScrollView>
       </View>
+      <SettingsButton />
+      <FloatingButton onPress={navigateToHome} imageSource={floatingButtonImage} />
     </View>
   );
 };

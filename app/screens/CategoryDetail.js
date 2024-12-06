@@ -11,6 +11,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import NotchedButton from "../components/NotchedButton";
+import SettingsButton from "../components/SettingsButton";
+import FloatingButton from "../components/FloatingButton";
 
 const CategoryDetailScreen = ({ route }) => {
   const { category } = route.params;
@@ -23,7 +25,7 @@ const CategoryDetailScreen = ({ route }) => {
   const [customCategory, setCustomCategory] = useState("");
 
   const backgroundImage = require("../../assets/images/vicbg.jpg");
-
+  const floatingButtonImage = require("../../assets/images/handograf.png");
   const navigateToGameplay = () => {
     navigation.navigate("Gameplay", { category, customCategory });
   };
@@ -56,6 +58,11 @@ const CategoryDetailScreen = ({ route }) => {
             style={styles.playButton}
           />
         </View>
+        <SettingsButton />
+        <FloatingButton
+          onPress={() => navigation.navigate("Home")}
+          imageSource={floatingButtonImage}
+        />
       </View>
     );
 

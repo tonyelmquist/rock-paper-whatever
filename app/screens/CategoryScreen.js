@@ -12,6 +12,10 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { categories } from "../data/categories";
 import NotchedButton from "../components/NotchedButton";
+import FloatingButton from "../components/FloatingButton";
+import SettingsButton from "../components/SettingsButton";
+
+import floatingButtonImage from "../../assets/images/handograf.png";
 
 const CategoryScreen = () => {
   const navigation = useNavigation();
@@ -21,6 +25,7 @@ const CategoryScreen = () => {
   };
 
   const backgroundImage = require("../../assets/images/vicbg.jpg");
+  const floatingButtonImage = require("../../assets/images/handograf.png");
 
   const renderCategory = ({ item }) => (
     <NotchedButton
@@ -29,6 +34,10 @@ const CategoryScreen = () => {
       text={item.name}
     />
   );
+
+  const navigateToHome = () => {
+    navigation.navigate("Home");
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -39,8 +48,8 @@ const CategoryScreen = () => {
       <FlatList
         data={[
           { name: "Random" },
-          { name: "Really Random" },
-          { name: "Create Your Own" },
+          { name: "Random (Robot Magic)" },
+         
 
           ...categories,
         ]}
@@ -48,6 +57,8 @@ const CategoryScreen = () => {
         keyExtractor={(item) => item.name}
         style={styles.flatList}
       />
+      <SettingsButton />
+      <FloatingButton onPress={navigateToHome} imageSource={floatingButtonImage} />
     </View>
   );
 };
