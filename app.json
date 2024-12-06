@@ -38,6 +38,15 @@
         {
           "fonts": ["./assets/fonts/Inter-Black.otf"]
         }
+      ],
+      [
+        "react-native-iap",
+        {
+          "ios": {
+            "bundleId": "com.rockpaperwhatever.app"
+          },
+          "paymentProvider": "both"
+        }
       ]
     ],
     "experiments": {

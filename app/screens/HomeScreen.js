@@ -13,7 +13,16 @@ const HomeScreen = ({ navigation }) => {
     Ewert: require("../../assets/fonts/Ewert-Regular.ttf"),
   });
 
+  const subtitles = [
+    "The game where you decide who beats who!",
+    "Can't agree on who wins? Have an argument? Let the app decide for you!",
+    "Make your own categories and play with your friends!",
+    "The game where you can't agree on who wins!",
+  ];
+
   const backgroundImage = require("../../assets/images/vicbg.jpg");
+
+  const randomSubtitle = subtitles[Math.floor(Math.random() * subtitles.length)];
 
   if (loaded)
     return (
@@ -25,9 +34,7 @@ const HomeScreen = ({ navigation }) => {
           <Text style={styles.title}>Rock!</Text>
           <Text style={styles.title}>Paper!</Text>
           <Text style={styles.title}>Whatever!</Text>
-          <Text style={styles.subtitle}>
-            The game where you decide who beats who!
-          </Text>
+          <Text style={styles.subtitle}>{randomSubtitle}</Text>
         </View>
         <View style={styles.buttonContainer}>
           <NotchedButton

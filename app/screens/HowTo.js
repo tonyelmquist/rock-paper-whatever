@@ -83,7 +83,7 @@ const HowToScreen = () => {
           <View style={styles.separator} />
           <Text style={styles.conclusion}>
             All of the AI-powered magic is thanks to the wonderful folks at
-            OpenAI. You can use the AI feature for free for 7 days, and then
+            OpenAI. You can use the AI features for free for 7 days, and then
             you'll need to sign up for an (incredibly cheap) subscription to
             cover our AI costs. Subscribe in the Settings menu to keep playing
             as long as you like!
