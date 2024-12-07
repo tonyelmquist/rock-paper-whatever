@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./screens/HomeScreen";
 import CategoryScreen from "./screens/CategoryScreen";
@@ -8,9 +8,15 @@ import JudgementScreen from "./screens/Judgement";
 import JustJudgementScreen from "./screens/JustJudgement";
 import HowToScreen from "./screens/HowTo";
 import SettingsScreen from "./screens/Settings";
+/* import { adapty } from "react-native-adapty"; */
+
 const Stack = createStackNavigator();
 
+/* adapty.activate("public_live_K7haNu74.kVWhABN2zGhCVb4Ts3jp"); */
+
 function AppNavigator() {
+
+  
   return (
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
@@ -58,10 +64,8 @@ function AppNavigator() {
 }
 
 export default function App() {
-  return (
-   
-      <AppNavigator />
-  
-  );
-}
 
+  
+
+  return <AppNavigator />;
+}

@@ -9,13 +9,16 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rockpaperwhatever.app",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/rock.png",
         "backgroundColor": "#000000"
-      }
+      },
+      "package": "com.rockpaperwhatever.app"
     },
     "web": {
       "bundler": "metro",
@@ -34,23 +37,25 @@
         }
       ],
       [
-        "expo-font",
+        "expo-build-properties",
         {
-          "fonts": ["./assets/fonts/Inter-Black.otf"]
-        }
-      ],
-      [
-        "react-native-iap",
-        {
-          "ios": {
-            "bundleId": "com.rockpaperwhatever.app"
+          "android": {
+            "usesCleartextTraffic": true
           },
-          "paymentProvider": "both"
+          "ios": {}
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "bd7f581e-3800-4e81-8644-ba4d026b546b"
+      }
     }
   }
 }

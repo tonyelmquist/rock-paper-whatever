@@ -4,7 +4,7 @@ import NotchedButton from "../components/NotchedButton";
 import { View, Text, StyleSheet, Image } from "react-native";
 import Loading from "../components/Loading";
 import SettingsButton from "../components/SettingsButton";
-import floatingButtonImage from "../../assets/images/handograf.png";
+
 
 const HomeScreen = ({ navigation }) => {
   const [loaded, error] = useFonts({
