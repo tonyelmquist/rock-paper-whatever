@@ -17,13 +17,6 @@
       "bundleIdentifier": "com.rockpaperwhatever.app",
       "buildNumber": "1.0.0"
     },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/rock.png",
-        "backgroundColor": "#000000"
-      },
-      "package": "com.rockpaperwhatever.app"
-    },
     "web": {
       "bundler": "metro",
       "output": "static",
@@ -31,15 +24,6 @@
     },
     "plugins": [
       "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/rock.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#000000"
-        }
-      ],
       [
         "expo-build-properties",
         {

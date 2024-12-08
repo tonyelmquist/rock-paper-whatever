@@ -30,7 +30,7 @@ const JudgementScreen = ({ route }) => {
       <View style={styles.contentContainer}>
         <Text style={styles.plainText}>The winner is:</Text>
         <Text style={styles.title} adjustsFontSizeToFit={true} numberOfLines={1}>{winner}</Text>
-        <Text style={styles.plainText}>{judgement}</Text>
+        <Text style={styles.plainText} adjustsFontSizeToFit={true} numberOfLines={20}>{judgement}</Text>
       </View>
       <View style={styles.backButton}>
         <NotchedButton action={() => navigation.goBack()} text="Back" />
