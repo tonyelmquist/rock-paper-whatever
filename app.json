@@ -1,11 +1,15 @@
 {
   "expo": {
-    "name": "rock-paper-whatever",
+    "name": "Rock, Paper, Whatever!",
     "slug": "rock-paper-whatever",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#FFFFFF"
+    },
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {

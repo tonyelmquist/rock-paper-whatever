@@ -71,7 +71,7 @@ const SettingsScreen = ({ navigation }) => {
             onSelect={() => handleJudgementStyleChange("fight")}
           />
           <CustomRadioButton
-            label="Pedantic"
+            label="Literal"
             selected={judgementStyle === "pedantic"}
             onSelect={() => handleJudgementStyleChange("pedantic")}
           />
