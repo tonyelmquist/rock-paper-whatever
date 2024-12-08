@@ -39,7 +39,13 @@ const CategoryDetailScreen = ({ route }) => {
         {category !== "Create Your Own" ? (
           <View style={styles.container}>
             <Text style={styles.plainText}>The category is:</Text>
-            <Text style={styles.categoryText} adjustsFontSizeToFit={true} numberOfLines={1}>{category}</Text>
+            <Text
+              style={styles.categoryText}
+              adjustsFontSizeToFit={true}
+              numberOfLines={1}
+            >
+              {category}
+            </Text>
           </View>
         ) : (
           <View style={styles.container}>
@@ -51,10 +57,11 @@ const CategoryDetailScreen = ({ route }) => {
             />
           </View>
         )}
+        <Text style={styles.plainText}>Ready to play?</Text>
         <View style={styles.playButton}>
           <NotchedButton
             action={navigateToGameplay}
-            text="Play"
+            text="Go!"
             style={styles.playButton}
           />
         </View>

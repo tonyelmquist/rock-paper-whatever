@@ -4,6 +4,8 @@ import NotchedButton from "../components/NotchedButton";
 import { View, Text, StyleSheet, Image } from "react-native";
 import Loading from "../components/Loading";
 import SettingsButton from "../components/SettingsButton";
+import logo from "../../assets/images/icon.png";
+/* import Purchases from "react-native-purchases"; */
 
 
 const HomeScreen = ({ navigation }) => {
@@ -31,9 +33,7 @@ const HomeScreen = ({ navigation }) => {
           <Image source={backgroundImage} style={styles.bgImage} />
         </View>
         <View style={styles.container}>
-          <Text style={styles.title}>Rock!</Text>
-          <Text style={styles.title}>Paper!</Text>
-          <Text style={styles.title}>Whatever!</Text>
+         <Image source={logo} style={styles.logo} />
           <Text style={styles.subtitle}>{randomSubtitle}</Text>
         </View>
         <View style={styles.buttonContainer}>
@@ -90,6 +90,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     margin: 10,
+  },
+  logo: {
+    width: "60%",
+    resizeMode: "contain",
+    marginTop: "20%",
   },
   title: {
     fontSize: 36,
