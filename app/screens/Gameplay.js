@@ -156,7 +156,7 @@ const GameplayScreen = ({ route }) => {
 
   const displayCategoryEntries = () => {
     let items;
-    if (category === "Random (Robot Magic)") {
+    if (category === "Random (AI driven)") {
       fetchRandomItems();
       return;
     } else if (category === "Create Your Own") {

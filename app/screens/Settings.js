@@ -75,10 +75,15 @@ const SettingsScreen = ({ navigation }) => {
             selected={judgementStyle === "pedantic"}
             onSelect={() => handleJudgementStyleChange("pedantic")}
           />
+          <CustomRadioButton
+            label="Silly"
+            selected={judgementStyle === "silly"}
+            onSelect={() => handleJudgementStyleChange("silly")}
+          />
         </View>
       </View>
       <SettingsButton />
-      <FloatingButton 
+      <FloatingButton
         onPress={() => navigation.navigate("Home")}
         imageSource={floatingButtonImage}
       />

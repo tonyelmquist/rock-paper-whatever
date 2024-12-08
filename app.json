@@ -44,6 +44,9 @@
       "eas": {
         "projectId": "bd7f581e-3800-4e81-8644-ba4d026b546b"
       }
+    },
+    "android": {
+      "package": "com.rockpaperwhatever.app"
     }
   }
 }

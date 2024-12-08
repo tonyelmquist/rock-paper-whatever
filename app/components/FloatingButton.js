@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     bottom: 20,
-    right: 20,
+    left: 20,
     elevation: 5,
   },
   floatingButtonImage: {

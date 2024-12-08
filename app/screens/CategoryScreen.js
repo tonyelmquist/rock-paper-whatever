@@ -48,7 +48,7 @@ const CategoryScreen = () => {
       <FlatList
         data={[
           { name: "Random" },
-          { name: "Random (Robot Magic)" },
+          { name: "Random (AI driven)" },
          
 
           ...categories,
