@@ -20,6 +20,8 @@ const HomeScreen = ({ navigation }) => {
 
  const {isSubscriber} = useContext(SubscriptionContext);
 
+  console.log(isSubscriber);
+
  async function presentPaywall() {
    // Present paywall for current offering:
    const paywallResult = await RevenueCatUI.presentPaywall();

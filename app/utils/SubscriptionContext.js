@@ -16,7 +16,7 @@ export const SubscriptionProvider = ({ children }) => {
 
         const customerInfo = await Purchases.getCustomerInfo();
         if (
-          typeof customerInfo.activeSubscriptions.length > 0
+         customerInfo.activeSubscriptions.length > 0
         ) {
           setIsSubscriber(true);
         }

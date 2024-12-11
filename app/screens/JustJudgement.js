@@ -41,7 +41,7 @@ const EnterItemsScreen = () => {
     const randomString = Math.random().toString(36).substring(7);
     try {
       const response = await fetch(
-        `http://www.rockpaperwhatever.com/${judgementEndpoint}?param1=${item1}&param2=${item2}&cacheBuster=${randomString}`
+        `https://www.rockpaperwhatever.com/${judgementEndpoint}?param1=${item1}&param2=${item2}&cacheBuster=${randomString}`
       );
       const result = await response.text();
       navigation.navigate("Judgement", { text: result });

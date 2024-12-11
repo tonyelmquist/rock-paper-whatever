@@ -42,6 +42,8 @@ const GameplayScreen = ({ route }) => {
 
   const { isSubscriber } = useContext(SubscriptionContext);
 
+  console.log(isSubscriber);
+
   const navigation = useNavigation();
 
   const navigateToCategories = () => {
