@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useFonts } from "expo-font";
 import NotchedButton from "../components/NotchedButton";
 import { View, Text, StyleSheet, Image } from "react-native";
 import Loading from "../components/Loading";
 import SettingsButton from "../components/SettingsButton";
 import logo from "../../assets/images/icon.png";
-/* import Purchases from "react-native-purchases"; */
+import backgroundImage from "../../assets/images/vicbg.jpg";
+import SubscriptionContext from "../utils/SubscriptionContext";
+
+import RevenueCatUI, { PAYWALL_RESULT } from "react-native-purchases-ui";
 
 
 const HomeScreen = ({ navigation }) => {
@@ -15,16 +18,13 @@ const HomeScreen = ({ navigation }) => {
     Ewert: require("../../assets/fonts/Ewert-Regular.ttf"),
   });
 
-  const subtitles = [
-    "The game where you decide who beats who!",
-    "Can't agree on who wins? Have an argument? Let the app decide for you!",
-    "Make your own categories and play with your friends!",
-    "The game where you can't agree on who wins!",
-  ];
+ const {isSubscriber} = useContext(SubscriptionContext);
 
-  const backgroundImage = require("../../assets/images/vicbg.jpg");
-
-  const randomSubtitle = subtitles[Math.floor(Math.random() * subtitles.length)];
+ async function presentPaywall() {
+   // Present paywall for current offering:
+   const paywallResult = await RevenueCatUI.presentPaywall();
+   // or if you need to present a specific offering:
+ }
 
   if (loaded)
     return (
@@ -33,8 +33,8 @@ const HomeScreen = ({ navigation }) => {
           <Image source={backgroundImage} style={styles.bgImage} />
         </View>
         <View style={styles.container}>
-         <Image source={logo} style={styles.logo} />
-          <Text style={styles.subtitle}>{randomSubtitle}</Text>
+          <Image source={logo} style={styles.logo} />
+          {/*  <Text style={styles.subtitle}>{randomSubtitle}</Text> */}
         </View>
         <View style={styles.buttonContainer}>
           <NotchedButton
@@ -42,20 +42,38 @@ const HomeScreen = ({ navigation }) => {
             action={() => navigation.navigate("Category")}
             text="Pick a Category"
           />
-          <NotchedButton
-            style={styles.button}
-            action={() =>
-              navigation.navigate("CategoryDetail", {
-                category: "Create Your Own",
-              })
-            }
-            text="Make Your Own"
-          />
-          <NotchedButton
-            style={styles.button}
-            action={() => navigation.navigate("JustJudgement")}
-            text="Just a Judgement"
-          />
+          {isSubscriber ? (
+            <NotchedButton
+              style={styles.button}
+              action={() =>
+                navigation.navigate("CategoryDetail", {
+                  category: "Create Your Own",
+                })
+              }
+              text="Make Your Own"
+            />
+          ) : (
+            <NotchedButton
+              style={styles.button}
+              action={() => presentPaywall()}
+              text="Create Your Own"
+            />
+          )}
+
+          {isSubscriber ? (
+            <NotchedButton
+              style={styles.button}
+              action={() => navigation.navigate("JustJudgement")}
+              text="Just a Judgement"
+            />
+          ) : (
+            <NotchedButton
+              style={styles.button}
+              action={() => presentPaywall()}
+              text="Just a Judgement"
+            />
+          )}
+
           <NotchedButton
             style={styles.button}
             action={() => navigation.navigate("HowTo")}

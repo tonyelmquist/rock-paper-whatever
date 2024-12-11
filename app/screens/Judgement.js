@@ -23,20 +23,35 @@ const JudgementScreen = ({ route }) => {
   const judgement = parts.slice(1).join(",");
 
   return (
-    <View style={{ flex: 1}}>
+    <View style={{ flex: 1 }}>
       <View style={styles.bgImageWrapper}>
         <Image source={backgroundImage} style={styles.bgImage} />
       </View>
       <View style={styles.contentContainer}>
         <Text style={styles.plainText}>The winner is:</Text>
-        <Text style={styles.title} adjustsFontSizeToFit={true} numberOfLines={1}>{winner}</Text>
-        <Text style={styles.plainText} adjustsFontSizeToFit={true} numberOfLines={16}>{judgement}</Text>
+        <Text
+          style={styles.title}
+          adjustsFontSizeToFit={true}
+          numberOfLines={1}
+        >
+          {winner}
+        </Text>
+        <Text
+          style={styles.plainText}
+          adjustsFontSizeToFit={true}
+          numberOfLines={20}
+        >
+          {judgement}
+        </Text>
       </View>
       <View style={styles.backButton}>
         <NotchedButton action={() => navigation.goBack()} text="Back" />
       </View>
       <SettingsButton />
-      <FloatingButton onPress={navigateToHome} imageSource={floatingButtonImage} />
+      <FloatingButton
+        onPress={navigateToHome}
+        imageSource={floatingButtonImage}
+      />
     </View>
   );
 };
@@ -50,7 +65,7 @@ const styles = StyleSheet.create({
     right: 0,
   },
   plainText: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: "AmericanTypewriter",
     color: "#000000",
     textAlign: "center",

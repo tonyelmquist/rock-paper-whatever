@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useFonts } from "expo-font";
 import {
   View,
@@ -18,13 +18,14 @@ import { categories, getAllItems } from "../data/categories";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FloatingButton from "../components/FloatingButton";
 import SettingsButton from "../components/SettingsButton";
-// Import images
+
+import RevenueCatUI, { PAYWALL_RESULT } from "react-native-purchases-ui";
 import rockImage from "../../assets/images/fistograph.png";
 import paperImage from "../../assets/images/papergraf.png";
 import whateverImage from "../../assets/images/handahand.png";
 import floatingButtonImage from "../../assets/images/handograf.png";
 import backgroundImage from "../../assets/images/vicbg.jpg";
-
+import SubscriptionContext from "../utils/SubscriptionContext";
 
 const GameplayScreen = ({ route }) => {
   const { category, customCategory } = route.params;
@@ -33,11 +34,13 @@ const GameplayScreen = ({ route }) => {
   const [winner, setWinner] = useState("");
   const [currentImage, setCurrentImage] = useState(null);
   const [playText, setPlayText] = useState("");
-   const [judgementStyle, setJudgementStyle] = useState("pedantic");
+  const [judgementStyle, setJudgementStyle] = useState("pedantic");
 
   useEffect(() => {
     startAnimation();
   }, []);
+
+  const { isSubscriber } = useContext(SubscriptionContext);
 
   const navigation = useNavigation();
 
@@ -47,7 +50,6 @@ const GameplayScreen = ({ route }) => {
   useEffect(() => {
     const loadSettings = async () => {
       try {
-
         const judgementStyleValue = await AsyncStorage.getItem(
           "judgementStyle"
         );
@@ -55,7 +57,6 @@ const GameplayScreen = ({ route }) => {
         if (judgementStyleValue !== null) {
           setJudgementStyle(judgementStyleValue);
         }
-
       } catch (error) {
         console.error("Failed to load settings", error);
       }
@@ -64,19 +65,19 @@ const GameplayScreen = ({ route }) => {
     loadSettings();
   }, []);
 
-    const fetchWinner = async (entry1, entry2) => {
-      const randomString = Math.random().toString(36).substring(7);
+  const fetchWinner = async (entry1, entry2) => {
+    const randomString = Math.random().toString(36).substring(7);
 
-      const judgementEndpoint = judgementStyle + ".php";  
+    const judgementEndpoint = judgementStyle + ".php";
 
-     try {
-       const response = await fetch(
-         `https://www.rockpaperwhatever.com/${judgementEndpoint}?param1=${entry1}&param2=${entry2}&cacheBuster=${randomString}`
-       );
-       const result = await response.text();
-       setWinner(result);
-       navigation.navigate("Judgement", { text: result });
-     } catch (error) {
+    try {
+      const response = await fetch(
+        `https://www.rockpaperwhatever.com/${judgementEndpoint}?param1=${entry1}&param2=${entry2}&cacheBuster=${randomString}`
+      );
+      const result = await response.text();
+      setWinner(result);
+      navigation.navigate("Judgement", { text: result });
+    } catch (error) {
       console.error("Error fetching winner:", error);
     }
   };
@@ -175,6 +176,13 @@ const GameplayScreen = ({ route }) => {
     return items[Math.floor(Math.random() * items.length)];
   };
 
+
+   async function presentPaywall() {
+     // Present paywall for current offering:
+     const paywallResult = await RevenueCatUI.presentPaywall();
+     // or if you need to present a specific offering:
+   }
+
   return (
     <View style={{ flex: 1 }}>
       {!(player1Entry && player2Entry) && winner === "" ? (
@@ -226,11 +234,19 @@ const GameplayScreen = ({ route }) => {
             </View>
           </View>
           <View style={styles.controlsContainer}>
-            <NotchedButton
-              action={() => fetchWinner(player1Entry, player2Entry)}
-              text="Get a Judgement!"
-              style={{ marginBottom: 10 }}
-            />
+            {isSubscriber ? (
+              <NotchedButton
+                action={() => fetchWinner(player1Entry, player2Entry)}
+                text="Get a Judgement!"
+                style={{ marginBottom: 10 }}
+              />
+            ) : (
+              <NotchedButton
+                action={() => presentPaywall()}
+                text="Get a Judgement!"
+                style={{ marginBottom: 10 }}
+              />
+            )}
             <NotchedButton
               action={startAnimation}
               text="Play Again"
@@ -241,7 +257,7 @@ const GameplayScreen = ({ route }) => {
         </View>
       )}
       <SettingsButton />
-      <FloatingButton 
+      <FloatingButton
         onPress={() => navigation.navigate("Home")}
         imageSource={floatingButtonImage}
       />

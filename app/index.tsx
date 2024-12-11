@@ -8,11 +8,9 @@ import JudgementScreen from "./screens/Judgement";
 import JustJudgementScreen from "./screens/JustJudgement";
 import HowToScreen from "./screens/HowTo";
 import SettingsScreen from "./screens/Settings";
-/* import { adapty } from "react-native-adapty"; */
+import { SubscriptionProvider } from "./utils/SubscriptionContext";
 
 const Stack = createStackNavigator();
-
-/* adapty.activate("public_live_K7haNu74.kVWhABN2zGhCVb4Ts3jp"); */
 
 function AppNavigator() {
 
@@ -64,8 +62,9 @@ function AppNavigator() {
 }
 
 export default function App() {
-
-  
-
-  return <AppNavigator />;
+  return (
+    <SubscriptionProvider>
+      <AppNavigator />
+    </SubscriptionProvider>
+  );
 }

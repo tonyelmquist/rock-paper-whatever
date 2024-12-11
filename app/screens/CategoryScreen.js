@@ -49,8 +49,6 @@ const CategoryScreen = () => {
         data={[
           { name: "Random" },
           { name: "Random (AI driven)" },
-         
-
           ...categories,
         ]}
         renderItem={renderCategory}
