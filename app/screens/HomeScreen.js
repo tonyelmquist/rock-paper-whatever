@@ -7,7 +7,7 @@ import SettingsButton from "../components/SettingsButton";
 import logo from "../../assets/images/icon.png";
 import backgroundImage from "../../assets/images/vicbg.jpg";
 import SubscriptionContext from "../utils/SubscriptionContext";
-
+import { Share } from "react-native";
 import RevenueCatUI, { PAYWALL_RESULT } from "react-native-purchases-ui";
 
 const HomeScreen = ({ navigation }) => {
@@ -24,6 +24,14 @@ const HomeScreen = ({ navigation }) => {
     const paywallResult = await RevenueCatUI.presentPaywall();
     // or if you need to present a specific offering:
   }
+
+  const share = (url, title, message) => {
+    Share.share({
+      message: message + " " + url,
+      url: url,
+      title: title,
+    })
+  };
 
   if (loaded)
     return (
@@ -77,6 +85,11 @@ const HomeScreen = ({ navigation }) => {
             style={styles.button}
             action={() => navigation.navigate("HowTo")}
             text="How to Play"
+          />
+          <NotchedButton
+            style={styles.button}
+            action={() => share("https://rockpaperwhatever.com", "Check out this game!", "Rock, Paper, Whatever!")}
+            text="Share with a Friend"
           />
         </View>
         <SettingsButton />
