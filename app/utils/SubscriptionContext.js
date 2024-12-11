@@ -18,8 +18,6 @@ export const SubscriptionProvider = ({ children }) => {
         if (customerInfo.activeSubscriptions.length > 0) {
           setIsSubscriber(true);
         }
-
-        console.log(customerInfo);
       } catch (e) {
         console.error("Error initializing RevenueCat:", e);
       }
