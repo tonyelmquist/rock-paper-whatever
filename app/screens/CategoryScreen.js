@@ -56,7 +56,10 @@ const CategoryScreen = () => {
         style={styles.flatList}
       />
       <SettingsButton />
-      <FloatingButton onPress={navigateToHome} imageSource={floatingButtonImage} />
+      <FloatingButton
+        onPress={navigateToHome}
+        imageSource={floatingButtonImage}
+      />
     </View>
   );
 };

@@ -8,11 +8,9 @@ import SettingsButton from "../components/SettingsButton";
 
 import floatingButtonImage from "../../assets/images/handograf.png";
 
-
 const JudgementScreen = ({ route }) => {
   const navigation = useNavigation();
   const { text } = route.params;
-
 
   const navigateToHome = () => {
     navigation.navigate("Home");

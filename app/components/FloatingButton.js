@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FloatingButton; 
+export default FloatingButton;

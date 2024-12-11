@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
-import Purchases from 'react-native-purchases';
+import React, { createContext, useState, useEffect } from "react";
+import Purchases from "react-native-purchases";
 
 const SubscriptionContext = createContext();
 
@@ -15,15 +15,13 @@ export const SubscriptionProvider = ({ children }) => {
         });
 
         const customerInfo = await Purchases.getCustomerInfo();
-        if (
-         customerInfo.activeSubscriptions.length > 0
-        ) {
+        if (customerInfo.activeSubscriptions.length > 0) {
           setIsSubscriber(true);
         }
 
         console.log(customerInfo);
       } catch (e) {
-        console.error('Error initializing RevenueCat:', e);
+        console.error("Error initializing RevenueCat:", e);
       }
     };
 

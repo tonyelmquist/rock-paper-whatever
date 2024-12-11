@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const NotchedToggle = ({  text, action, selected }) => {
+const NotchedToggle = ({ text, action, selected }) => {
   const bgcolor = selected ? "#271D1B" : "#818181";
   const color = selected ? "white" : "black";
   const width = "100%";

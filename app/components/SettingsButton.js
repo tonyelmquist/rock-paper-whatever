@@ -11,7 +11,10 @@ const SettingsButton = () => {
   const imageSource = require("../../assets/images/gearsm.png");
 
   return (
-    <TouchableOpacity style={styles.floatingButton} onPress={navigateToSettings}>
+    <TouchableOpacity
+      style={styles.floatingButton}
+      onPress={navigateToSettings}
+    >
       <ImageBackground
         source={imageSource}
         style={styles.floatingButtonImage}
@@ -44,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingsButton; 
+export default SettingsButton;

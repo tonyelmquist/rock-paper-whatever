@@ -10,15 +10,14 @@ import FloatingButton from "../components/FloatingButton";
 import floatingButtonImage from "../../assets/images/handograf.png";
 
 const SettingsScreen = ({ navigation }) => {
-
   const [judgementStyle, setJudgementStyle] = useState("pedantic");
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const loadSettings = async () => {
       try {
-        
-        const judgementStyleValue = await AsyncStorage.getItem("judgementStyle");
+        const judgementStyleValue =
+          await AsyncStorage.getItem("judgementStyle");
 
         if (judgementStyleValue !== null) {
           setJudgementStyle(judgementStyleValue);
@@ -33,11 +32,7 @@ const SettingsScreen = ({ navigation }) => {
   }, []);
 
   const CustomRadioButton = ({ label, selected, onSelect }) => (
-    <NotchedToggle
-      text={label}
-      selected={selected}
-      action={onSelect}
-    />
+    <NotchedToggle text={label} selected={selected} action={onSelect} />
   );
 
   const handleJudgementStyleChange = async (value) => {

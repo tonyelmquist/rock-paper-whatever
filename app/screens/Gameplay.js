@@ -52,9 +52,8 @@ const GameplayScreen = ({ route }) => {
   useEffect(() => {
     const loadSettings = async () => {
       try {
-        const judgementStyleValue = await AsyncStorage.getItem(
-          "judgementStyle"
-        );
+        const judgementStyleValue =
+          await AsyncStorage.getItem("judgementStyle");
 
         if (judgementStyleValue !== null) {
           setJudgementStyle(judgementStyleValue);
@@ -74,7 +73,7 @@ const GameplayScreen = ({ route }) => {
 
     try {
       const response = await fetch(
-        `https://www.rockpaperwhatever.com/${judgementEndpoint}?param1=${entry1}&param2=${entry2}&cacheBuster=${randomString}`
+        `https://www.rockpaperwhatever.com/${judgementEndpoint}?param1=${entry1}&param2=${entry2}&cacheBuster=${randomString}`,
       );
       const result = await response.text();
       setWinner(result);
@@ -88,7 +87,7 @@ const GameplayScreen = ({ route }) => {
     try {
       const randomString = Math.random().toString(36).substring(7);
       const response = await fetch(
-        `https://www.rockpaperwhatever.com/randomness.php?cacheBuster=${randomString}`
+        `https://www.rockpaperwhatever.com/randomness.php?cacheBuster=${randomString}`,
       );
       const result = await response.text();
       const items = result.split(",");
@@ -103,7 +102,7 @@ const GameplayScreen = ({ route }) => {
     try {
       const randomString = Math.random().toString(36).substring(7);
       const response = await fetch(
-        `https://www.rockpaperwhatever.com/choices.php?param1=${customCategory}&cacheBuster=${randomString}`
+        `https://www.rockpaperwhatever.com/choices.php?param1=${customCategory}&cacheBuster=${randomString}`,
       );
       const result = await response.text();
       const items = result.split(",");
@@ -178,12 +177,11 @@ const GameplayScreen = ({ route }) => {
     return items[Math.floor(Math.random() * items.length)];
   };
 
-
-   async function presentPaywall() {
-     // Present paywall for current offering:
-     const paywallResult = await RevenueCatUI.presentPaywall();
-     // or if you need to present a specific offering:
-   }
+  async function presentPaywall() {
+    // Present paywall for current offering:
+    const paywallResult = await RevenueCatUI.presentPaywall();
+    // or if you need to present a specific offering:
+  }
 
   return (
     <View style={{ flex: 1 }}>

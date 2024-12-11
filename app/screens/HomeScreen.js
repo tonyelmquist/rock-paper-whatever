@@ -10,7 +10,6 @@ import SubscriptionContext from "../utils/SubscriptionContext";
 
 import RevenueCatUI, { PAYWALL_RESULT } from "react-native-purchases-ui";
 
-
 const HomeScreen = ({ navigation }) => {
   const [loaded, error] = useFonts({
     Aguante: require("../../assets/fonts/Aguante-Regular.otf"),
@@ -18,15 +17,15 @@ const HomeScreen = ({ navigation }) => {
     Ewert: require("../../assets/fonts/Ewert-Regular.ttf"),
   });
 
- const {isSubscriber} = useContext(SubscriptionContext);
+  const { isSubscriber } = useContext(SubscriptionContext);
 
   console.log(isSubscriber);
 
- async function presentPaywall() {
-   // Present paywall for current offering:
-   const paywallResult = await RevenueCatUI.presentPaywall();
-   // or if you need to present a specific offering:
- }
+  async function presentPaywall() {
+    // Present paywall for current offering:
+    const paywallResult = await RevenueCatUI.presentPaywall();
+    // or if you need to present a specific offering:
+  }
 
   if (loaded)
     return (

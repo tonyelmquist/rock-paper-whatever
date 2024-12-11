@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const NotchedButton = ({  text, action }) => {
+const NotchedButton = ({ text, action }) => {
   const color = "#271D1B";
   const width = "100%";
 
@@ -18,7 +18,11 @@ const NotchedButton = ({  text, action }) => {
       <View
         style={{ ...styles.centerViewStyle, width, backgroundColor: color }}
       >
-        <Text style={styles.textStyle} adjustsFontSizeToFit={true} numberOfLines={1}>
+        <Text
+          style={styles.textStyle}
+          adjustsFontSizeToFit={true}
+          numberOfLines={1}
+        >
           {text}
         </Text>
       </View>

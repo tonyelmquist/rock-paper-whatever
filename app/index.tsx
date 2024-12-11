@@ -13,8 +13,6 @@ import { SubscriptionProvider } from "./utils/SubscriptionContext";
 const Stack = createStackNavigator();
 
 function AppNavigator() {
-
-  
   return (
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen

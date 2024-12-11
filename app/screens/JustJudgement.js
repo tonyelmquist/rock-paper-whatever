@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, TextInput, Image, StyleSheet, Text, TouchableOpacity, ImageBackground } from "react-native";
+import {
+  View,
+  TextInput,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import NotchedButton from "../components/NotchedButton";
 import backgroundImage from "../../assets/images/vicbg.jpg";
@@ -21,9 +29,8 @@ const EnterItemsScreen = () => {
   useEffect(() => {
     const loadSettings = async () => {
       try {
-        const judgementStyleValue = await AsyncStorage.getItem(
-          "judgementStyle"
-        );
+        const judgementStyleValue =
+          await AsyncStorage.getItem("judgementStyle");
 
         if (judgementStyleValue !== null) {
           setJudgementStyle(judgementStyleValue);
@@ -41,7 +48,7 @@ const EnterItemsScreen = () => {
     const randomString = Math.random().toString(36).substring(7);
     try {
       const response = await fetch(
-        `https://www.rockpaperwhatever.com/${judgementEndpoint}?param1=${item1}&param2=${item2}&cacheBuster=${randomString}`
+        `https://www.rockpaperwhatever.com/${judgementEndpoint}?param1=${item1}&param2=${item2}&cacheBuster=${randomString}`,
       );
       const result = await response.text();
       navigation.navigate("Judgement", { text: result });
@@ -55,7 +62,10 @@ const EnterItemsScreen = () => {
       <View style={styles.bgImageWrapper}>
         <Image source={backgroundImage} style={styles.bgImage} />
       </View>
-      <Text style={styles.orText}>Need someone to decide who wins? Enter your two items and let the app decide!</Text>
+      <Text style={styles.orText}>
+        Need someone to decide who wins? Enter your two items and let the app
+        decide!
+      </Text>
       <TextInput
         style={styles.input}
         placeholder="Enter first item"
@@ -72,7 +82,10 @@ const EnterItemsScreen = () => {
       <View style={styles.buttonContainer}>
         <NotchedButton action={fetchJudgement} text="Get a Judgement!" />
       </View>
-      <FloatingButton onPress={navigateToHome} imageSource={floatingButtonImage} />
+      <FloatingButton
+        onPress={navigateToHome}
+        imageSource={floatingButtonImage}
+      />
       <SettingsButton />
     </View>
   );
