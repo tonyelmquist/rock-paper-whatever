@@ -14,8 +14,8 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.rockpaperwhatever.app",
-      "buildNumber": "1.0.0"
+      "bundleIdentifier": "com.seamuffin.rockpaperwhatever",
+      "buildNumber": "1.0.4"
     },
     "web": {
       "bundler": "metro",

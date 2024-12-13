@@ -9,6 +9,7 @@ import JustJudgementScreen from "./screens/JustJudgement";
 import HowToScreen from "./screens/HowTo";
 import SettingsScreen from "./screens/Settings";
 import { SubscriptionProvider } from "./utils/SubscriptionContext";
+import { AIUsageProvider } from "./utils/AIUsageContext";
 
 const Stack = createStackNavigator();
 
@@ -62,7 +63,9 @@ function AppNavigator() {
 export default function App() {
   return (
     <SubscriptionProvider>
-      <AppNavigator />
+      <AIUsageProvider>
+        <AppNavigator />
+      </AIUsageProvider>
     </SubscriptionProvider>
   );
 }

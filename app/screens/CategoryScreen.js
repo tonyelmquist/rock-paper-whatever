@@ -14,18 +14,23 @@ import { categories } from "../data/categories";
 import NotchedButton from "../components/NotchedButton";
 import FloatingButton from "../components/FloatingButton";
 import SettingsButton from "../components/SettingsButton";
-
+import AIUsageContext from "../utils/AIUsageContext";
+import { useContext } from "react";
 import floatingButtonImage from "../../assets/images/handograf.png";
+import backgroundImage from "../../assets/images/vicbg.jpg";
 
 const CategoryScreen = () => {
   const navigation = useNavigation();
 
+  const { incrementUsage, getUsageCount } = useContext(AIUsageContext);
+
   const handleCategorySelect = (category) => {
+
+    if (category === "Random (AI driven)") {
+      incrementUsage("category");
+    }
     navigation.navigate("CategoryDetail", { category: category });
   };
-
-  const backgroundImage = require("../../assets/images/vicbg.jpg");
-  const floatingButtonImage = require("../../assets/images/handograf.png");
 
   const renderCategory = ({ item }) => (
     <NotchedButton

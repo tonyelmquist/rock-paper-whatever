@@ -26,15 +26,19 @@ import whateverImage from "../../assets/images/handahand.png";
 import floatingButtonImage from "../../assets/images/handograf.png";
 import backgroundImage from "../../assets/images/vicbg.jpg";
 import SubscriptionContext from "../utils/SubscriptionContext";
+import AIUsageContext from "../utils/AIUsageContext";
 
 const GameplayScreen = ({ route }) => {
   const { category, customCategory } = route.params;
+  const { incrementUsage, getUsageCount } = useContext(AIUsageContext);
   const [player1Entry, setPlayer1Entry] = useState("");
   const [player2Entry, setPlayer2Entry] = useState("");
   const [winner, setWinner] = useState("");
   const [currentImage, setCurrentImage] = useState(null);
   const [playText, setPlayText] = useState("");
   const [judgementStyle, setJudgementStyle] = useState("pedantic");
+
+  const judgementUsage = getUsageCount("judgement");    
 
   useEffect(() => {
     startAnimation();
@@ -65,6 +69,8 @@ const GameplayScreen = ({ route }) => {
   }, []);
 
   const fetchWinner = async (entry1, entry2) => {
+    incrementUsage("judgement");
+
     const randomString = Math.random().toString(36).substring(7);
 
     const judgementEndpoint = judgementStyle + ".php";
@@ -232,7 +238,7 @@ const GameplayScreen = ({ route }) => {
             </View>
           </View>
           <View style={styles.controlsContainer}>
-            {isSubscriber ? (
+            {isSubscriber || judgementUsage < 10 ? (
               <NotchedButton
                 action={() => fetchWinner(player1Entry, player2Entry)}
                 text="Get a Judgement!"
