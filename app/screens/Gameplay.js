@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useContext } from "react";
-import { useFonts } from "expo-font";
 import {
   View,
   Text,
@@ -9,8 +8,6 @@ import {
   useAnimatedValue,
   Image,
   Easing,
-  TouchableOpacity,
-  ImageBackground,
 } from "react-native";
 import NotchedButton from "../components/NotchedButton";
 import { useNavigation } from "@react-navigation/native";
