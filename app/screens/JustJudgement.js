@@ -22,6 +22,8 @@ const EnterItemsScreen = () => {
   const navigation = useNavigation();
   const [judgementStyle, setJudgementStyle] = useState("obtuse");
 
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+
   const navigateToHome = () => {
     navigation.navigate("Home");
   };
@@ -48,7 +50,7 @@ const EnterItemsScreen = () => {
     const randomString = Math.random().toString(36).substring(7);
     try {
       const response = await fetch(
-        `https://www.rockpaperwhatever.com/${judgementEndpoint}?param1=${item1}&param2=${item2}&cacheBuster=${randomString}`,
+        `${apiUrl}/${judgementEndpoint}?param1=${item1}&param2=${item2}&cacheBuster=${randomString}`,
       );
       const result = await response.text();
       navigation.navigate("Judgement", { text: result });

@@ -71,7 +71,7 @@ const HomeScreen = ({ navigation }) => {
         </View>
         <View style={styles.container}>
           <Image source={logo} style={styles.logo} />
-          {!isSubscriber && (
+         {/*  {!isSubscriber && (
             <View style={styles.usageContainer}>
               <Text style={styles.usageText}>
                 {`Custom Categories: ${10 - getUsageCount("category")} remaining`}
@@ -80,7 +80,7 @@ const HomeScreen = ({ navigation }) => {
                 {`Judgements: ${10 - getUsageCount("judgement")} remaining`}
               </Text>
             </View>
-          )}
+          )} */}
         </View>
         <View style={styles.buttonContainer}>
           <NotchedButton

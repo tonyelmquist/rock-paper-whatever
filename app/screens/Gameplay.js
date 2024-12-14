@@ -40,6 +40,8 @@ const GameplayScreen = ({ route }) => {
 
   const judgementUsage = getUsageCount("judgement");    
 
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+
   useEffect(() => {
     startAnimation();
   }, []);
@@ -77,7 +79,7 @@ const GameplayScreen = ({ route }) => {
 
     try {
       const response = await fetch(
-        `https://www.rockpaperwhatever.com/${judgementEndpoint}?param1=${entry1}&param2=${entry2}&cacheBuster=${randomString}`,
+        `${apiUrl}/${judgementEndpoint}?param1=${entry1}&param2=${entry2}&cacheBuster=${randomString}`,
       );
       const result = await response.text();
       setWinner(result);
@@ -91,7 +93,7 @@ const GameplayScreen = ({ route }) => {
     try {
       const randomString = Math.random().toString(36).substring(7);
       const response = await fetch(
-        `https://www.rockpaperwhatever.com/randomness.php?cacheBuster=${randomString}`,
+        `${apiUrl}/randomness.php?cacheBuster=${randomString}`,
       );
       const result = await response.text();
       const items = result.split(",");
@@ -106,7 +108,7 @@ const GameplayScreen = ({ route }) => {
     try {
       const randomString = Math.random().toString(36).substring(7);
       const response = await fetch(
-        `https://www.rockpaperwhatever.com/choices.php?param1=${customCategory}&cacheBuster=${randomString}`,
+        `${apiUrl}/choices.php?param1=${customCategory}&cacheBuster=${randomString}`,
       );
       const result = await response.text();
       const items = result.split(",");

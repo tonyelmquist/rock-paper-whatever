@@ -6,12 +6,14 @@ const SubscriptionContext = createContext();
 export const SubscriptionProvider = ({ children }) => {
   const [isSubscriber, setIsSubscriber] = useState(false);
 
+  const apiKey = process.env.EXPO_PUBLIC_API_KEY;
+  
   useEffect(() => {
     const setupPurchases = async () => {
       try {
         Purchases.setLogLevel(Purchases.LOG_LEVEL.DEBUG);
         await Purchases.configure({
-          apiKey: "appl_dYUvwUUznvxJHamzbvwxKnOJMVU",
+          apiKey: apiKey,
         });
 
         const customerInfo = await Purchases.getCustomerInfo();
