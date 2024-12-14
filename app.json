@@ -2,7 +2,7 @@
   "expo": {
     "name": "Rock, Paper, Whatever!",
     "slug": "rock-paper-whatever",
-    "version": "1.0.0",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -15,7 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.seamuffin.rockpaperwhatever",
-      "buildNumber": "1.0.4"
+      "buildNumber": "1.0.5"
     },
     "web": {
       "bundler": "metro",
