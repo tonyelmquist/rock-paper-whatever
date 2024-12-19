@@ -19,17 +19,18 @@ const SettingsScreen = ({ navigation }) => {
 
   const { isSubscriber } = useContext(SubscriptionContext);
 
-    async function presentPaywall() {
-      // Present paywall for current offering:
-      const paywallResult = await RevenueCatUI.presentPaywall();
-      // or if you need to present a specific offering:
-    }
+  async function presentPaywall() {
+    // Present paywall for current offering:
+    const paywallResult = await RevenueCatUI.presentPaywall();
+    // or if you need to present a specific offering:
+  }
 
   useEffect(() => {
     const loadSettings = async () => {
       try {
-        const judgementStyleValue =
-          await AsyncStorage.getItem("judgementStyle");
+        const judgementStyleValue = await AsyncStorage.getItem(
+          "judgementStyle"
+        );
 
         if (judgementStyleValue !== null) {
           setJudgementStyle(judgementStyleValue);
@@ -88,16 +89,17 @@ const SettingsScreen = ({ navigation }) => {
             onSelect={() => handleJudgementStyleChange("silly")}
           />
         </View>
-         </View>
+      </View>
       <SettingsButton />
       <FloatingButton
         onPress={() => navigation.navigate("Home")}
         imageSource={floatingButtonImage}
       />
-     
+      {/*    
      {!isSubscriber ? <TouchableOpacity style={styles.button} onPress={() => presentPaywall()}>
       <Text style={styles.buttonText}>Get unlimited access to AI-driven features</Text>
      </TouchableOpacity> : <Text style={styles.buttonText}>You have unlimited access to AI-driven features</Text>}
+  */}
     </View>
   );
 };

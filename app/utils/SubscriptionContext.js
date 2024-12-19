@@ -6,29 +6,27 @@ const SubscriptionContext = createContext();
 export const SubscriptionProvider = ({ children }) => {
   const [isSubscriber, setIsSubscriber] = useState(false);
 
-  const apiKey = process.env.EXPO_PUBLIC_API_KEY;
-  
   useEffect(() => {
     const setupPurchases = async () => {
       try {
         Purchases.setLogLevel(Purchases.LOG_LEVEL.DEBUG);
         await Purchases.configure({
-          apiKey: apiKey,
+          apiKey: process.env.REVENUECAT_API_KEY,
         });
 
-        
-        const products = await Purchases.getProducts([
-      
-        ]);
-
-        console.log("products", products);
-
+        // Initial check for subscription status
         const customerInfo = await Purchases.getCustomerInfo();
+        updateSubscriptionStatus(customerInfo);
 
-        console.log("customerInfo", customerInfo);
-        if (customerInfo.activeSubscriptions.length > 0) {
-          setIsSubscriber(true);
-        }
+        // Add listener for subscription updates
+        const customerInfoUpdateListener = Purchases.addCustomerInfoUpdateListener((customerInfo) => {
+          updateSubscriptionStatus(customerInfo);
+        });
+
+        // Clean up the listener on unmount
+        return () => {
+          customerInfoUpdateListener.remove();
+        };
       } catch (e) {
         console.error("Error initializing RevenueCat:", e);
       }
@@ -37,8 +35,16 @@ export const SubscriptionProvider = ({ children }) => {
     setupPurchases();
   }, []);
 
+  const updateSubscriptionStatus = (customerInfo) => {
+    if (customerInfo.activeSubscriptions.length > 0) {
+      setIsSubscriber(true);
+    } else {
+      setIsSubscriber(false);
+    }
+  };
+
   return (
-    <SubscriptionContext.Provider value={{ isSubscriber: isSubscriber }}>
+    <SubscriptionContext.Provider value={{ isSubscriber }}>
       {children}
     </SubscriptionContext.Provider>
   );
