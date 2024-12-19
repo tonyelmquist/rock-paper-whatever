@@ -1,7 +1,7 @@
-export const categories = [
+ [
   {
-    name: "Animals",
-    items: [
+    "name": "Animals",
+    "items": [
       "Lion",
       "Tiger",
       "Bear",
@@ -207,12 +207,12 @@ export const categories = [
       "Swordfish",
       "Marlin",
       "Barracuda",
-      "Piranha",
-    ],
+      "Piranha"
+    ] 
   },
   {
-    name: "Historical Figures",
-    items: [
+    "name": "Historical Figures",
+    "items": [
       "Julius Caesar",
       "Cleopatra",
       "Alexander the Great",
@@ -401,12 +401,12 @@ export const categories = [
       "Yo-Yo Ma",
       "Itzhak Perlman",
       "Lang Lang",
-      "Jacqueline du Pré",
-    ],
+      "Jacqueline du Pré"
+    ]
   },
   {
-    name: "Inventions",
-    items: [
+    "name": "Inventions",
+    "items": [
       "Wheel",
       "Compass",
       "Printing Press",
@@ -621,14 +621,12 @@ export const categories = [
       "Steel Wool",
       "Trash Can",
       "Recycling Bin",
-      "Compost Bin",
-    ],
+      "Compost Bin"
+    ]
   },
-  // ... (previous categories)
-
   {
-    name: "Natural Phenomena",
-    items: [
+    "name": "Natural Phenomena",
+    "items": [
       "Rainbow",
       "Aurora Borealis",
       "Solar Eclipse",
@@ -837,12 +835,12 @@ export const categories = [
       "Polar Vortex",
       "Rossby Waves",
       "Lee Waves",
-      "Kelvin Waves",
-    ],
+      "Kelvin Waves"
+    ]
   },
   {
-    name: "Fictional Characters",
-    items: [
+    "name": "Fictional Characters",
+    "items": [
       "Sherlock Holmes",
       "Harry Potter",
       "Hermione Granger",
@@ -1050,12 +1048,12 @@ export const categories = [
       "Azog",
       "Bolg",
       "Gollum",
-      "Shelob",
-    ],
+      "Shelob"
+    ]
   },
   {
-    name: "Landmarks",
-    items: [
+    "name": "Landmarks",
+    "items": [
       "Eiffel Tower",
       "Statue of Liberty",
       "Great Wall of China",
@@ -1224,12 +1222,12 @@ export const categories = [
       "Lalibela",
       "Simien Mountains",
       "Axum",
-      "Gondar",
-    ],
+      "Gondar"
+    ]
   },
   {
-    name: "Professions",
-    items: [
+    "name": "Professions",
+    "items": [
       "Doctor",
       "Nurse",
       "Surgeon",
@@ -1471,12 +1469,12 @@ export const categories = [
       "Cobbler",
       "Upholsterer",
       "Furniture Maker",
-      "Woodworker",
-    ],
+      "Woodworker"
+    ]
   },
   {
-    name: "Foods",
-    items: [
+    "name": "Foods",
+    "items": [
       "Pizza",
       "Hamburger",
       "Sushi",
@@ -1693,12 +1691,12 @@ export const categories = [
       "Croque Monsieur",
       "Crème Brûlée",
       "Tarte Tatin",
-      "Champagne",
-    ],
+      "Champagne"
+    ]
   },
   {
-    name: "Sports and Games",
-    items: [
+    "name": "Sports and Games",
+    "items": [
       "Football",
       "Basketball",
       "Baseball",
@@ -1926,12 +1924,12 @@ export const categories = [
       "Hacky Sack",
       "Foosball",
       "Air Hockey",
-      "Ping Pong",
-    ],
+      "Ping Pong"
+    ]
   },
   {
-    name: "Art and Literature",
-    items: [
+    "name": "Art and Literature",
+    "items": [
       "Mona Lisa",
       "The Starry Night",
       "The Persistence of Memory",
@@ -2158,11 +2156,7 @@ export const categories = [
       "The Story of a Shipwrecked Sailor",
       "Collected Stories",
       "Living to Tell the Tale",
-      "The Fragrance of Guava",
-    ],
-  },
-];
-
-export const getAllItems = () => {
-  return categories.flatMap((category) => category.items);
-};
+      "The Fragrance of Guava"
+    ]
+  }
+]

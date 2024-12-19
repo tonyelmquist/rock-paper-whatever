@@ -16,7 +16,16 @@ export const SubscriptionProvider = ({ children }) => {
           apiKey: apiKey,
         });
 
+        
+        const products = await Purchases.getProducts([
+      
+        ]);
+
+        console.log("products", products);
+
         const customerInfo = await Purchases.getCustomerInfo();
+
+        console.log("customerInfo", customerInfo);
         if (customerInfo.activeSubscriptions.length > 0) {
           setIsSubscriber(true);
         }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { View, Text, StyleSheet, Image } from "react-native";
 import Loading from "../components/Loading";
@@ -8,10 +8,22 @@ import NotchedToggle from "../components/NotchedToggle";
 import backgroundImage from "../../assets/images/vicbg.jpg";
 import FloatingButton from "../components/FloatingButton";
 import floatingButtonImage from "../../assets/images/handograf.png";
+import { TouchableOpacity } from "react-native";
+
+import RevenueCatUI, { PAYWALL_RESULT } from "react-native-purchases-ui";
+import SubscriptionContext from "../utils/SubscriptionContext";
 
 const SettingsScreen = ({ navigation }) => {
   const [judgementStyle, setJudgementStyle] = useState("pedantic");
   const [loaded, setLoaded] = useState(false);
+
+  const { isSubscriber } = useContext(SubscriptionContext);
+
+    async function presentPaywall() {
+      // Present paywall for current offering:
+      const paywallResult = await RevenueCatUI.presentPaywall();
+      // or if you need to present a specific offering:
+    }
 
   useEffect(() => {
     const loadSettings = async () => {
@@ -76,12 +88,16 @@ const SettingsScreen = ({ navigation }) => {
             onSelect={() => handleJudgementStyleChange("silly")}
           />
         </View>
-      </View>
+         </View>
       <SettingsButton />
       <FloatingButton
         onPress={() => navigation.navigate("Home")}
         imageSource={floatingButtonImage}
       />
+     
+     {!isSubscriber ? <TouchableOpacity style={styles.button} onPress={() => presentPaywall()}>
+      <Text style={styles.buttonText}>Get unlimited access to AI-driven features</Text>
+     </TouchableOpacity> : <Text style={styles.buttonText}>You have unlimited access to AI-driven features</Text>}
     </View>
   );
 };
@@ -133,11 +149,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#000000",
     padding: 15,
     borderRadius: 0,
-    marginLeft: 20,
-    marginRight: 20,
+    marginLeft: "10%",
+    marginRight: "10%",
     marginBottom: 10,
     borderWidth: 2,
     borderColor: "#FFFFFF",
+    width: "80%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: "20%",
+    marginBottom: "20%",
+    borderRadius: 10,
   },
   buttonText: {
     color: "white",

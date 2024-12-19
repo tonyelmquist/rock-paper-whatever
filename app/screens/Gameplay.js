@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import NotchedButton from "../components/NotchedButton";
 import { useNavigation } from "@react-navigation/native";
-import { categories, getAllItems } from "../data/categories";
+import categories from "../data/categories";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FloatingButton from "../components/FloatingButton";
 import SettingsButton from "../components/SettingsButton";
@@ -168,7 +168,7 @@ const GameplayScreen = ({ route }) => {
       fetchMyCategory();
       return;
     } else if (category === "Random") {
-      items = getAllItems();
+      items = categories.flatMap((cat) => cat.items);
     } else {
       items = categories.find((cat) => cat.name === category).items;
     }

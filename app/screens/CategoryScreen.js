@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
-import { categories } from "../data/categories";
+import  categories  from "../data/categories";
 import NotchedButton from "../components/NotchedButton";
 import FloatingButton from "../components/FloatingButton";
 import SettingsButton from "../components/SettingsButton";
